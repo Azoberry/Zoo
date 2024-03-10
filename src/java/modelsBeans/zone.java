@@ -1,16 +1,18 @@
 package modelsBeans;
 
-public class zoneBean {
+/*@author Sergio*/
+
+public class zone {
     private int idZona;
     private String ubicacion;
     private double area;
 
-    public zoneBean(int idZona, String ubicacion, double area) {
+    public zone(int idZona, String ubicacion, double area) {
         this.idZona = idZona;
         this.ubicacion = ubicacion;
         this.area = area;
     }
-    public zoneBean() {}
+    public zone() {}
 
     public int getIdZona() {return idZona;}
     public void setIdZona(int idZona) {this.idZona = idZona;}

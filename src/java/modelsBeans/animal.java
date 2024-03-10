@@ -1,6 +1,8 @@
 package modelsBeans;
 
-public class animalBean {
+/*@author Sergio*/
+
+public class animal {
     private int idAnimal;
     private String nombre;
     private String apodo;
@@ -13,7 +15,7 @@ public class animalBean {
     private double tamano;
     private int idHabitat;
 
-    public animalBean(int idAnimal, String nombre, String apodo, String dieta, String descripcion, String habitatNatural, char sexo, int edad, double peso, double tamano, int idHabitat) {
+    public animal(int idAnimal, String nombre, String apodo, String dieta, String descripcion, String habitatNatural, char sexo, int edad, double peso, double tamano, int idHabitat) {
         this.idAnimal = idAnimal;
         this.nombre = nombre;
         this.apodo = apodo;
@@ -26,7 +28,7 @@ public class animalBean {
         this.tamano = tamano;
         this.idHabitat = idHabitat;
     }
-    public animalBean() {}
+    public animal() {}
     
     public int getIdAnimal() {return idAnimal;}
     public void setIdAnimal(int idAnimal) {this.idAnimal = idAnimal;}

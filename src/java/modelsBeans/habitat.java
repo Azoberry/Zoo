@@ -2,7 +2,9 @@ package modelsBeans;
 
 import java.sql.Time;
 
-public class habitatBean {
+/*@author Sergio*/
+
+public class habitat {
     private int idHabitat;
     private String nombre;
     private String descripcion;
@@ -12,7 +14,7 @@ public class habitatBean {
     private Time horarioCierre;
     private int idZona;
 
-    public habitatBean(int idHabitat, String nombre, String descripcion, int capacidad, double area, Time horarioApertura, Time horarioCierre, int idZona) {
+    public habitat(int idHabitat, String nombre, String descripcion, int capacidad, double area, Time horarioApertura, Time horarioCierre, int idZona) {
         this.idHabitat = idHabitat;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -22,7 +24,7 @@ public class habitatBean {
         this.horarioCierre = horarioCierre;
         this.idZona = idZona;
     }
-    public habitatBean() {}
+    public habitat() {}
 
     public int getIdHabitat() {return idHabitat;}
     public void setIdHabitat(int idHabitat) {this.idHabitat = idHabitat;}
