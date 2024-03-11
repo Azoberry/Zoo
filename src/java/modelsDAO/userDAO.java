@@ -13,7 +13,6 @@ import java.util.List;
 /*@author Sergio*/
 
 public class userDAO {
-    
     conexion conexion = new conexion();
     Connection con;
     PreparedStatement pstm;
@@ -28,36 +27,36 @@ public class userDAO {
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                user user1 = new user();
+                user User = new user();
                 
-                user1.setIdUsuario(rs.getInt(1));
-                user1.setNombre(rs.getString(2));
-                user1.setApellidoP(rs.getString(3));
-                user1.setApellidoM(rs.getString(4));
-                user1.setCorreo(rs.getString(5));
-                user1.setEdad(rs.getInt(6));
-                user1.setSexo(rs.getString(7).charAt(0));
-                user1.setPrivilegio(rs.getString(8).charAt(0));
+                User.setIdUsuario(rs.getInt(1));
+                User.setNombre(rs.getString(2));
+                User.setApellidoP(rs.getString(3));
+                User.setApellidoM(rs.getString(4));
+                User.setCorreo(rs.getString(5));
+                User.setEdad(rs.getInt(6));
+                User.setSexo(rs.getString(7).charAt(0));
+                User.setPrivilegio(rs.getString(8).charAt(0));
                 
-                listUser.add(user1);
+                listUser.add(User);
             }
         } catch (SQLException e) {}
        return listUser;
     }
     
-    public int Agregar(user user1) {
+    public int Agregar(user User) {
         String sql = "INSERT INTO usuario (nombre, apellidoP, apellidoM, correo, edad, sexo, privilegio) VALUES (?,?,?,?,?,?,?)";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            pstm.setString(1, user1.getNombre());
-            pstm.setString(2, user1.getApellidoP());
-            pstm.setString(3, user1.getApellidoM());
-            pstm.setString(4, user1.getCorreo());
-            pstm.setInt(5, user1.getEdad());
-            pstm.setString(6, String.valueOf(user1.getSexo()));
-            pstm.setString(7, String.valueOf(user1.getPrivilegio()));
+            pstm.setString(1, User.getNombre());
+            pstm.setString(2, User.getApellidoP());
+            pstm.setString(3, User.getApellidoM());
+            pstm.setString(4, User.getCorreo());
+            pstm.setInt(5, User.getEdad());
+            pstm.setString(6, String.valueOf(User.getSexo()));
+            pstm.setString(7, String.valueOf(User.getPrivilegio()));
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -66,20 +65,20 @@ public class userDAO {
         return r;
     }
     
-    public int Actualizar(user user1) {
+    public int Actualizar(user User) {
         String sql = "UPDATE usuario SET nombre = ?, apellidoP = ?, apellidoM = ?, correo = ?, edad = ?, sexo = ?, privilegio = ? WHERE idUsuario = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            pstm.setString(1, user1.getNombre());
-            pstm.setString(2, user1.getApellidoP());
-            pstm.setString(3, user1.getApellidoM());
-            pstm.setString(4, user1.getCorreo());
-            pstm.setInt(5, user1.getEdad());
-            pstm.setString(6, String.valueOf(user1.getSexo()));
-            pstm.setString(7, String.valueOf(user1.getPrivilegio()));
-            pstm.setInt(8, user1.getIdUsuario());
+            pstm.setString(1, User.getNombre());
+            pstm.setString(2, User.getApellidoP());
+            pstm.setString(3, User.getApellidoM());
+            pstm.setString(4, User.getCorreo());
+            pstm.setInt(5, User.getEdad());
+            pstm.setString(6, String.valueOf(User.getSexo()));
+            pstm.setString(7, String.valueOf(User.getPrivilegio()));
+            pstm.setInt(8, User.getIdUsuario());
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -103,7 +102,7 @@ public class userDAO {
     }
     
     public user Buscar(int id) {
-        user user1 = new user();
+        user User = new user();
         String sql = "SELECT * FROM usuario WHERE idUsuario = ?";
         try {
             con = conexion.conn();
@@ -114,18 +113,18 @@ public class userDAO {
             rs = pstm.executeQuery();
             
             while (rs.next()) {
-                user1.setIdUsuario(rs.getInt(1));
-                user1.setNombre(rs.getString(2));
-                user1.setApellidoP(rs.getString(3));
-                user1.setApellidoM(rs.getString(4));
-                user1.setCorreo(rs.getString(5));
-                user1.setEdad(rs.getInt(6));
-                user1.setSexo(rs.getString(7).charAt(0));
-                user1.setPrivilegio(rs.getString(8).charAt(0));
+                User.setIdUsuario(rs.getInt(1));
+                User.setNombre(rs.getString(2));
+                User.setApellidoP(rs.getString(3));
+                User.setApellidoM(rs.getString(4));
+                User.setCorreo(rs.getString(5));
+                User.setEdad(rs.getInt(6));
+                User.setSexo(rs.getString(7).charAt(0));
+                User.setPrivilegio(rs.getString(8).charAt(0));
             }
         } catch (SQLException e) {
             System.out.println("No se listo" + e.toString());
         }
-        return user1;
+        return User;
     }
 }
