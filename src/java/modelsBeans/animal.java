@@ -8,20 +8,20 @@ public class animal {
     private String apodo;
     private String dieta;
     private String descripcion;
-    private String habitatNatural;
+    private String habitatNat;
     private char sexo;
     private int edad;
     private double peso;
     private double tamano;
     private int idHabitat;
 
-    public animal(int idAnimal, String nombre, String apodo, String dieta, String descripcion, String habitatNatural, char sexo, int edad, double peso, double tamano, int idHabitat) {
+    public animal(int idAnimal, String nombre, String apodo, String dieta, String descripcion, String habitatNat, char sexo, int edad, double peso, double tamano, int idHabitat) {
         this.idAnimal = idAnimal;
         this.nombre = nombre;
         this.apodo = apodo;
         this.dieta = dieta;
         this.descripcion = descripcion;
-        this.habitatNatural = habitatNatural;
+        this.habitatNat = habitatNat;
         this.sexo = sexo;
         this.edad = edad;
         this.peso = peso;
@@ -45,8 +45,8 @@ public class animal {
     public String getDescripcion() {return descripcion;}
     public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
     
-    public String getHabitatNatural() {return habitatNatural;}
-    public void setHabitatNatural(String habitatNatural) {this.habitatNatural = habitatNatural;}
+    public String getHabitatNat() {return habitatNat;}
+    public void setHabitatNat(String habitatNat) {this.habitatNat = habitatNat;}
 
     public char getSexo() {return sexo;}
     public void setSexo(char sexo) {this.sexo = sexo;}
@@ -65,6 +65,6 @@ public class animal {
 
     @Override
     public String toString() {
-        return "animalBean{" + "idAnimal=" + idAnimal + ", nombre=" + nombre + ", apodo=" + apodo + ", dieta=" + dieta + ", descripcion=" + descripcion + ", habitatNatural=" + habitatNatural + ", sexo=" + sexo + ", edad=" + edad + ", peso=" + peso + ", tamano=" + tamano + ", idHabitat=" + idHabitat + '}';
+        return "animalBean{" + "idAnimal=" + idAnimal + ", nombre=" + nombre + ", apodo=" + apodo + ", dieta=" + dieta + ", descripcion=" + descripcion + ", habitatNatural=" + habitatNat + ", sexo=" + sexo + ", edad=" + edad + ", peso=" + peso + ", tamano=" + tamano + ", idHabitat=" + idHabitat + '}';
     }
 }

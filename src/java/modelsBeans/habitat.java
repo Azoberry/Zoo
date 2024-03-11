@@ -10,8 +10,8 @@ public class habitat {
     private String descripcion;
     private int capacidad;
     private double area;
-    private Time horarioApertura;
-    private Time horarioCierre;
+    private Time horarioAper;
+    private Time horarioCier;
     private int idZona;
 
     public habitat(int idHabitat, String nombre, String descripcion, int capacidad, double area, Time horarioApertura, Time horarioCierre, int idZona) {
@@ -20,8 +20,8 @@ public class habitat {
         this.descripcion = descripcion;
         this.capacidad = capacidad;
         this.area = area;
-        this.horarioApertura = horarioApertura;
-        this.horarioCierre = horarioCierre;
+        this.horarioAper = horarioApertura;
+        this.horarioCier = horarioCierre;
         this.idZona = idZona;
     }
     public habitat() {}
@@ -41,17 +41,17 @@ public class habitat {
     public double getArea() {return area;}
     public void setArea(double area) {this.area = area;}
 
-    public Time getHorarioApertura() {return horarioApertura;}
-    public void setHorarioApertura(Time horarioApertura) {this.horarioApertura = horarioApertura;}
+    public Time getHorarioAper() {return horarioAper;}
+    public void setHorarioAper(Time horarioAper) {this.horarioAper = horarioAper;}
 
-    public Time getHorarioCierre() {return horarioCierre;}
-    public void setHorarioCierre(Time horarioCierre) {this.horarioCierre = horarioCierre;}
+    public Time getHorarioCier() {return horarioCier;}
+    public void setHorarioCier(Time horarioCier) {this.horarioCier = horarioCier;}
 
     public int getIdZona() {return idZona;}
     public void setIdZona(int idZona) {this.idZona = idZona;}
 
     @Override
     public String toString() {
-        return "habitatBean{" + "idHabitat=" + idHabitat + ", nombre=" + nombre + ", descripcion=" + descripcion + ", capacidad=" + capacidad + ", area=" + area + ", horarioApertura=" + horarioApertura + ", horarioCierre=" + horarioCierre + ", idZona=" + idZona + '}';
+        return "habitatBean{" + "idHabitat=" + idHabitat + ", nombre=" + nombre + ", descripcion=" + descripcion + ", capacidad=" + capacidad + ", area=" + area + ", horarioApertura=" + horarioAper + ", horarioCierre=" + horarioCier + ", idZona=" + idZona + '}';
     }
 }
