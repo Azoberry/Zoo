@@ -4,8 +4,16 @@
         <servlet-name>usersController</servlet-name>
         <servlet-class>controllers.usersController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>animalController</servlet-name>
+        <servlet-class>controllers.animalController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>usersController</servlet-name>
         <url-pattern>/usersController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>animalController</servlet-name>
+        <url-pattern>/animalController</url-pattern>
     </servlet-mapping>
 </web-app>

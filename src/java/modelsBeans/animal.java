@@ -28,6 +28,18 @@ public class animal {
         this.tamano = tamano;
         this.idHabitat = idHabitat;
     }
+    public animal(String nombre, String apodo, String dieta, String descripcion, String habitatNat, char sexo, int edad, double peso, double tamano, int idHabitat) {
+        this.nombre = nombre;
+        this.apodo = apodo;
+        this.dieta = dieta;
+        this.descripcion = descripcion;
+        this.habitatNat = habitatNat;
+        this.sexo = sexo;
+        this.edad = edad;
+        this.peso = peso;
+        this.tamano = tamano;
+        this.idHabitat = idHabitat;
+    }
     public animal() {}
     
     public int getIdAnimal() {return idAnimal;}

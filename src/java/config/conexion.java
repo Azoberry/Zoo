@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class conexion {
     Connection con;
-    String url = "jdbc:mysql://localhost:3306/prueba?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    String url = "jdbc:mysql://localhost:3306/zoologico?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     String user = "root";
     String pass = "root";
     
