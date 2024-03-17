@@ -12,6 +12,10 @@ public class zone {
         this.ubicacion = ubicacion;
         this.area = area;
     }
+    public zone(String ubicacion, double area) {
+        this.ubicacion = ubicacion;
+        this.area = area;
+    }
     public zone() {}
 
     public int getIdZona() {return idZona;}

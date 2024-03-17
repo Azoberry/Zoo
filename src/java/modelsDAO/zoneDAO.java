@@ -12,7 +12,7 @@ import java.util.List;
 
 /*@author Sergio*/
 
-public class zonaDAO {
+public class zoneDAO {
     conexion conexion = new conexion();
     Connection con;
     PreparedStatement pstm;
@@ -63,6 +63,7 @@ public class zonaDAO {
             
             pstm.setString(1, Zone.getUbicacion());
             pstm.setDouble(2, Zone.getArea());
+            pstm.setDouble(3, Zone.getIdZona());
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -72,7 +73,7 @@ public class zonaDAO {
     }
     
     public void Borrar(int id) {
-        String sql = "DELETE FROM zone WHERE idZona = ?";
+        String sql = "DELETE FROM zona WHERE idZona = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);

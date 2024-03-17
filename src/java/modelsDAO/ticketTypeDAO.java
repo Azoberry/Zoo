@@ -1,22 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelsDAO;
 
 import config.conexion;
+import modelsBeans.ticketType;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelsBeans.ticketType;
 
-/**
- *
- * @author Kalos
- */
+/*@author Kalos*/
+
 public class ticketTypeDAO {
     
     conexion conexion = new conexion();
@@ -24,7 +19,6 @@ public class ticketTypeDAO {
     PreparedStatement pstm;
     ResultSet rs;
     int r;
-    
     
      public List lista() {
         String sql = "SELECT * FROM tipoboleto";
@@ -47,14 +41,13 @@ public class ticketTypeDAO {
     }
     
     public int Agregar(ticketType TicketType) {
-        String sql = "INSERT INTO tipoboleto (idBoleto, tipo, precio) VALUES (?,?,?)";
+        String sql = "INSERT INTO tipoboleto (tipo, precio) VALUES (?,?)";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            pstm.setInt(1, TicketType.getIdBoleto());
-            pstm.setString(2, TicketType.getTipo());
-            pstm.setDouble(3, TicketType.getPrecio());
+            pstm.setString(1, TicketType.getTipo());
+            pstm.setDouble(2, TicketType.getPrecio());
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -64,14 +57,14 @@ public class ticketTypeDAO {
     }
     
     public int Actualizar(ticketType TicketType) {
-        String sql = "UPDATE tipoboleto SET tipo = ?, precio = ?, WHERE idBoleto = ?";
+        String sql = "UPDATE tipoboleto SET tipo = ?, precio = ? WHERE idBoleto = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
             pstm.setString(1, TicketType.getTipo());
             pstm.setDouble(2, TicketType.getPrecio());
-            
+            pstm.setInt(3, TicketType.getIdBoleto());
             
             pstm.executeUpdate();
         } catch (SQLException e) {

@@ -1,7 +1,5 @@
 package modelsBeans;
 
-import java.sql.Time;
-
 /*@author Sergio*/
 
 public class habitat {
@@ -10,12 +8,21 @@ public class habitat {
     private String descripcion;
     private int capacidad;
     private double area;
-    private Time horarioAper;
-    private Time horarioCier;
+    private String horarioAper;
+    private String horarioCier;
     private int idZona;
 
-    public habitat(int idHabitat, String nombre, String descripcion, int capacidad, double area, Time horarioApertura, Time horarioCierre, int idZona) {
+    public habitat(int idHabitat, String nombre, String descripcion, int capacidad, double area, String horarioApertura, String horarioCierre, int idZona) {
         this.idHabitat = idHabitat;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.capacidad = capacidad;
+        this.area = area;
+        this.horarioAper = horarioApertura;
+        this.horarioCier = horarioCierre;
+        this.idZona = idZona;
+    }
+    public habitat(String nombre, String descripcion, int capacidad, double area, String horarioApertura, String horarioCierre, int idZona) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.capacidad = capacidad;
@@ -41,11 +48,11 @@ public class habitat {
     public double getArea() {return area;}
     public void setArea(double area) {this.area = area;}
 
-    public Time getHorarioAper() {return horarioAper;}
-    public void setHorarioAper(Time horarioAper) {this.horarioAper = horarioAper;}
+    public String getHorarioAper() {return horarioAper;}
+    public void setHorarioAper(String horarioAper) {this.horarioAper = horarioAper;}
 
-    public Time getHorarioCier() {return horarioCier;}
-    public void setHorarioCier(Time horarioCier) {this.horarioCier = horarioCier;}
+    public String getHorarioCier() {return horarioCier;}
+    public void setHorarioCier(String horarioCier) {this.horarioCier = horarioCier;}
 
     public int getIdZona() {return idZona;}
     public void setIdZona(int idZona) {this.idZona = idZona;}

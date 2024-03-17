@@ -1,29 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelsDAO;
 
 import config.conexion;
+import modelsBeans.salesTicketType;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelsBeans.salesTicketType;
 
-/**
- *
- * @author Kalos
- */
+/*@author Kalos*/
+
 public class salesTicketTypeDAO {
- conexion conexion = new conexion();
+ 
+    conexion conexion = new conexion();
     Connection con;
     PreparedStatement pstm;
     ResultSet rs;
     int r;
-    
     
      public List lista() {
         String sql = "SELECT * FROM ventatipoboleto";
@@ -63,12 +58,14 @@ public class salesTicketTypeDAO {
     }
     
     public int Actualizar(salesTicketType SalesTicketType) {
-        String sql = "UPDATE ventatipoboleto SET  cantidad = ?, WHERE idVenta = ?";
+        String sql = "UPDATE ventatipoboleto SET  cantidad = ? WHERE idVenta = ? AND idBoleto = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
            
-            pstm.setInt(1, SalesTicketType.getCantidad());            
+            pstm.setInt(1, SalesTicketType.getCantidad());
+            pstm.setInt(2, SalesTicketType.getIdVenta());
+            pstm.setInt(3, SalesTicketType.getIdBoleto());
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -77,13 +74,14 @@ public class salesTicketTypeDAO {
         return r;
     }
     
-    public void Borrar(int id) {
-        String sql = "DELETE FROM ventatipoboleto WHERE idVenta = ?";
+    public void Borrar(int idVenta, int idBoleto) {
+        String sql = "DELETE FROM ventatipoboleto WHERE idVenta = ? AND idBoleto = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            pstm.setInt(1, id);
+            pstm.setInt(1, idVenta);
+            pstm.setInt(2, idBoleto);
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -91,23 +89,22 @@ public class salesTicketTypeDAO {
         }
     }
     
-    public salesTicketType Buscar(int id) {
+    public salesTicketType Buscar(int idVenta, int idBoleto) {
         salesTicketType SalesTicketType = new salesTicketType();
-        String sql = "SELECT * FROM ventatipoboleto WHERE idVenta = ?";
+        String sql = "SELECT * FROM ventatipoboleto WHERE idVenta = ? AND idBoleto = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            pstm.setInt(1, id);
+            pstm.setInt(1, idVenta);
+            pstm.setInt(2, idBoleto);
             
             rs = pstm.executeQuery();
             
             while (rs.next()) {
                 SalesTicketType.setIdVenta(rs.getInt(1));
                 SalesTicketType.setIdBoleto(rs.getInt(2));
-                SalesTicketType.setCantidad(rs.getInt(3));
-                
-                
+                SalesTicketType.setCantidad(rs.getInt(3));   
             }
         } catch (SQLException e) {
             System.out.println("No se listo" + e.toString());

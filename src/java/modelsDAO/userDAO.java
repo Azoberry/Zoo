@@ -34,9 +34,10 @@ public class userDAO {
                 User.setApellidoP(rs.getString(3));
                 User.setApellidoM(rs.getString(4));
                 User.setCorreo(rs.getString(5));
-                User.setEdad(rs.getInt(6));
-                User.setSexo(rs.getString(7).charAt(0));
-                User.setPrivilegio(rs.getString(8).charAt(0));
+                User.setContrasena(rs.getString(6));
+                User.setEdad(rs.getInt(7));
+                User.setSexo(rs.getString(8).charAt(0));
+                User.setPrivilegio(rs.getString(9).charAt(0));
                 
                 listUser.add(User);
             }
@@ -45,7 +46,7 @@ public class userDAO {
     }
     
     public int Agregar(user User) {
-        String sql = "INSERT INTO usuario (nombre, apellidoP, apellidoM, correo, edad, sexo, privilegio) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuario (nombre, apellidoP, apellidoM, correo, contrasena, edad, sexo, privilegio) VALUES (?,?,?,?,?,?,?,?)";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
@@ -54,9 +55,10 @@ public class userDAO {
             pstm.setString(2, User.getApellidoP());
             pstm.setString(3, User.getApellidoM());
             pstm.setString(4, User.getCorreo());
-            pstm.setInt(5, User.getEdad());
-            pstm.setString(6, String.valueOf(User.getSexo()));
-            pstm.setString(7, String.valueOf(User.getPrivilegio()));
+            pstm.setString(5, User.getContrasena());
+            pstm.setInt(6, User.getEdad());
+            pstm.setString(7, String.valueOf(User.getSexo()));
+            pstm.setString(8, String.valueOf(User.getPrivilegio()));
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -66,7 +68,7 @@ public class userDAO {
     }
     
     public int Actualizar(user User) {
-        String sql = "UPDATE usuario SET nombre = ?, apellidoP = ?, apellidoM = ?, correo = ?, edad = ?, sexo = ?, privilegio = ? WHERE idUsuario = ?";
+        String sql = "UPDATE usuario SET nombre = ?, apellidoP = ?, apellidoM = ?, correo = ?, contrasena = ?, edad = ?, sexo = ?, privilegio = ? WHERE idUsuario = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
@@ -75,10 +77,11 @@ public class userDAO {
             pstm.setString(2, User.getApellidoP());
             pstm.setString(3, User.getApellidoM());
             pstm.setString(4, User.getCorreo());
-            pstm.setInt(5, User.getEdad());
-            pstm.setString(6, String.valueOf(User.getSexo()));
-            pstm.setString(7, String.valueOf(User.getPrivilegio()));
-            pstm.setInt(8, User.getIdUsuario());
+            pstm.setString(5, User.getContrasena());
+            pstm.setInt(6, User.getEdad());
+            pstm.setString(7, String.valueOf(User.getSexo()));
+            pstm.setString(8, String.valueOf(User.getPrivilegio()));
+            pstm.setInt(9, User.getIdUsuario());
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -118,9 +121,10 @@ public class userDAO {
                 User.setApellidoP(rs.getString(3));
                 User.setApellidoM(rs.getString(4));
                 User.setCorreo(rs.getString(5));
-                User.setEdad(rs.getInt(6));
-                User.setSexo(rs.getString(7).charAt(0));
-                User.setPrivilegio(rs.getString(8).charAt(0));
+                User.setContrasena(rs.getString(6));
+                User.setEdad(rs.getInt(7));
+                User.setSexo(rs.getString(8).charAt(0));
+                User.setPrivilegio(rs.getString(9).charAt(0));
             }
         } catch (SQLException e) {
             System.out.println("No se listo" + e.toString());

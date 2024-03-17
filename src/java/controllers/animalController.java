@@ -17,9 +17,7 @@ public class animalController extends HttpServlet {
     
     private final animalDAO AnimalDAO;
     
-    public animalController() {
-        this.AnimalDAO = new animalDAO();
-    }
+    public animalController() {this.AnimalDAO = new animalDAO();}
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,19 +78,19 @@ public class animalController extends HttpServlet {
         
         animal Animal = new animal(nombre, apodo, dieta, descripcion, habitatNat, sexo, edad, peso, tamano, idHabitat);
         AnimalDAO.Agregar(Animal);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/Zoo/tests/testAnimal.jsp");
     }
     
     private void borrarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
         AnimalDAO.Borrar(idAnimal);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/Zoo/tests/testAnimal.jsp");
     }
     
     private void editarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
         animal existeAnimal = AnimalDAO.Buscar(idAnimal);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/tests/testAnimal.jsp");
         request.setAttribute("Animal", existeAnimal);
         dispatcher.forward(request, response);
     }
@@ -112,6 +110,6 @@ public class animalController extends HttpServlet {
         
         animal Animal = new animal(idAnimal, nombre, apodo, dieta, descripcion, habitatNat, sexo, edad, peso, tamano, idHabitat);
         AnimalDAO.Actualizar(Animal);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/Zoo/tests/testAnimal.jsp");
     }
 }

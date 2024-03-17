@@ -34,8 +34,8 @@ public class habitatDAO {
                 Habitat.setDescripcion(rs.getString(3));
                 Habitat.setCapacidad(rs.getInt(4));
                 Habitat.setArea(rs.getDouble(5));
-                Habitat.setHorarioAper(rs.getTime(6));
-                Habitat.setHorarioCier(rs.getTime(7));
+                Habitat.setHorarioAper(rs.getString(6));
+                Habitat.setHorarioCier(rs.getString(7));
                 Habitat.setIdZona(rs.getInt(8));
                 
                 listHabitat.add(Habitat);
@@ -54,7 +54,7 @@ public class habitatDAO {
             pstm.setString(2, Habitat.getDescripcion());
             pstm.setInt(3, Habitat.getCapacidad());
             pstm.setDouble(4, Habitat.getArea());
-            pstm.setTime(5, Habitat.getHorarioAper());
+            pstm.setString(5, Habitat.getHorarioAper());
             pstm.setString(6, String.valueOf(Habitat.getHorarioCier()));
             pstm.setString(7, String.valueOf(Habitat.getIdZona()));
             
@@ -75,8 +75,8 @@ public class habitatDAO {
             pstm.setString(2, Habitat.getDescripcion());
             pstm.setInt(3, Habitat.getCapacidad());
             pstm.setDouble(4, Habitat.getArea());
-            pstm.setTime(5, Habitat.getHorarioAper());
-            pstm.setTime(6, Habitat.getHorarioCier());
+            pstm.setString(5, Habitat.getHorarioAper());
+            pstm.setString(6, Habitat.getHorarioCier());
             pstm.setInt(7, Habitat.getIdZona());
             pstm.setInt(8, Habitat.getIdHabitat());
             
@@ -118,8 +118,8 @@ public class habitatDAO {
                 Habitat.setDescripcion(rs.getString(3));
                 Habitat.setCapacidad(rs.getInt(4));
                 Habitat.setArea(rs.getDouble(5));
-                Habitat.setHorarioAper(rs.getTime(6));
-                Habitat.setHorarioCier(rs.getTime(7));
+                Habitat.setHorarioAper(rs.getString(6));
+                Habitat.setHorarioCier(rs.getString(7));
                 Habitat.setIdZona(rs.getInt(8));
             }
         } catch (SQLException e) {

@@ -1,19 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-        <servlet-name>usersController</servlet-name>
-        <servlet-class>controllers.usersController</servlet-class>
+        <servlet-name>userController</servlet-name>
+        <servlet-class>controllers.userController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>animalController</servlet-name>
         <servlet-class>controllers.animalController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ticketTypeController</servlet-name>
+        <servlet-class>controllers.ticketTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>salesController</servlet-name>
+        <servlet-class>controllers.salesController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>salesTicketTypeController</servlet-name>
+        <servlet-class>controllers.salesTicketTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>habitatController</servlet-name>
+        <servlet-class>controllers.habitatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>zoneController</servlet-name>
+        <servlet-class>controllers.zoneController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>usersController</servlet-name>
-        <url-pattern>/usersController</url-pattern>
+        <servlet-name>userController</servlet-name>
+        <url-pattern>/userController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>animalController</servlet-name>
         <url-pattern>/animalController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ticketTypeController</servlet-name>
+        <url-pattern>/ticketTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>salesController</servlet-name>
+        <url-pattern>/salesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>salesTicketTypeController</servlet-name>
+        <url-pattern>/salesTicketTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>habitatController</servlet-name>
+        <url-pattern>/habitatController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>zoneController</servlet-name>
+        <url-pattern>/zoneController</url-pattern>
     </servlet-mapping>
 </web-app>

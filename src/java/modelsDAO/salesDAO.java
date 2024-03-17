@@ -1,24 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelsDAO;
 
 import config.conexion;
+import modelsBeans.sales;
+
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelsBeans.sales;
 
+/*@author Kalos*/
 
-/**
- *
- * @author Kalos
- */
 public class salesDAO {
     
     conexion conexion = new conexion();
@@ -26,7 +19,6 @@ public class salesDAO {
     PreparedStatement pstm;
     ResultSet rs;
     int r;
-    
     
      public List lista() {
         String sql = "SELECT * FROM ventas";
@@ -39,7 +31,7 @@ public class salesDAO {
                 sales Sales = new sales();
                 
                 Sales.setIdVenta(rs.getInt(1));
-                Sales.setFechaVenta(rs.getDate(2));
+                Sales.setFechaVenta(rs.getString(2));
                 Sales.setTotal(rs.getDouble(3));
                 Sales.setIdUsuario(rs.getInt(4));
                 
@@ -50,16 +42,13 @@ public class salesDAO {
     }
     
     public int Agregar(sales Sales) {
-        String sql = "INSERT INTO ventas (idVenta, fechaVenta, total, idUsuario) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO ventas (fechaVenta, total, idUsuario) VALUES (NOW(),?,?)";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            pstm.setInt(1, Sales.getIdVenta());
-            java.sql.Date fechaVentaSQL = new java.sql.Date(Sales.getFechaVenta().getTime());
-            pstm.setDate(2, fechaVentaSQL);
-            pstm.setDouble(3, Sales.getTotal());
-            pstm.setInt(4, Sales.getIdUsuario());
+            pstm.setDouble(1, Sales.getTotal());
+            pstm.setInt(2, Sales.getIdUsuario());
             
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -69,14 +58,13 @@ public class salesDAO {
     }
     
     public int Actualizar(sales Sales) {
-        String sql = "UPDATE ventas SET fechaVenta = ?, total = ?, WHERE idVenta = ?";
+        String sql = "UPDATE ventas SET total = ? WHERE idVenta = ?";
         try {
             con = conexion.conn();
             pstm = con.prepareStatement(sql);
             
-            java.sql.Date fechaVentaSQL = new java.sql.Date(Sales.getFechaVenta().getTime());
-            pstm.setDate(1, fechaVentaSQL);
-            pstm.setDouble(2, Sales.getTotal());
+            pstm.setDouble(1, Sales.getTotal());
+            pstm.setInt(2, Sales.getIdVenta());
             
             
             pstm.executeUpdate();
@@ -113,15 +101,13 @@ public class salesDAO {
             
             while (rs.next()) {
                 Sales.setIdVenta(rs.getInt(1));
-                Sales.setFechaVenta(rs.getDate(2));
-                Sales.setTotal(rs.getInt(3));
+                Sales.setFechaVenta(rs.getString(2));
+                Sales.setTotal(rs.getDouble(3));
                 Sales.setIdUsuario(rs.getInt(4));
-                
             }
         } catch (SQLException e) {
             System.out.println("No se listo" + e.toString());
         }
         return Sales;
     }
-
 }
