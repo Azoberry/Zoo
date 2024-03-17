@@ -131,4 +131,22 @@ public class userDAO {
         }
         return User;
     }
+    
+    public int BuscarPorCredenciales(String correo, String contrasena) {
+        int id=0;
+        String sql = "SELECT idUsuario FROM usuario WHERE correo = ? AND contrasena = ?";
+        try {
+            con = conexion.conn();
+            pstm = con.prepareStatement(sql);
+            
+            pstm.setInt(1, id);
+            
+            rs = pstm.executeQuery();
+            
+            id=rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("No se encuentra usuario" + e.toString());
+        }
+        return id;
+    }
 }
