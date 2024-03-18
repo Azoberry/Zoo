@@ -8,16 +8,21 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.servlet.RequestDispatcher;
 import java.sql.SQLException;
+import modelsBeans.sales;
+import modelsDAO.salesDAO;
 import modelsBeans.user;
 import modelsDAO.userDAO;
+import modelsBeans.salesTicketType;
+import modelsDAO.salesTicketTypeDAO;
 
 /*@author Sergio*/
 
 public class userController extends HttpServlet {
 
     private final userDAO UserDAO;
+    private final salesDAO SalesDAO;
     
-    public userController() {this.UserDAO = new userDAO();}
+    public userController() {this.UserDAO = new userDAO(); this.SalesDAO = new salesDAO();}
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +62,26 @@ public class userController extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            case "Iniciar Sesion":
+                try {
+                    iniciarSesion(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            case "Crear Cuenta":
+                try {
+                    iniciarSesion(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 break;
+            case "Pagar":
+                try {
+                    actualizarUser(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;  
             default:
                 System.out.println("Opcion equivocada");
                 break;
@@ -108,4 +132,42 @@ public class userController extends HttpServlet {
         UserDAO.Actualizar(User);
         response.sendRedirect("/Zoo/tests/testUser.jsp");
     }
+    
+    private void iniciarSesion(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String correo = request.getParameter("correo");
+        String contrasena = request.getParameter("contrasena");
+        
+        if(UserDAO.BuscarPorCredenciales(correo, contrasena) != 0){
+            response.sendRedirect("/Zoo/test/testBuy.jsp");
+        }else{
+            response.sendRedirect("/Zoo/test/testLogin.jsp");            
+        }
+        
+    }
+    public void pagar(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String id = request.getParameter("id");
+        String ninos = request.getParameter("ninos");
+        String adultos = request.getParameter("adultos");
+        String total = request.getParameter("costoTotal");
+        
+        int Id = Integer.parseInt(id);
+        int Ninos = Integer.parseInt(ninos);
+        int Adultos = Integer.parseInt(adultos);
+        Double CostoTotal = Double.parseDouble(total);
+        
+        sales Sales = new sales(CostoTotal, Id);
+        SalesDAO.Agregar(Sales);
+        
+        if(Ninos != 0){
+            salesTicketType SalesTicketType1 = new salesTicketType(Sales.getIdVenta(),1,Ninos);
+            salesTicketTypeDAO.Agregar(SalesTicketType1);
+        }
+        if(Adultos != 0){
+            salesTicketType SalesTicketType2 = new salesTicketType(Sales.getIdVenta(),2,Adultos);
+            salesTicketTypeDAO.Agregar(SalesTicketType2);
+        }
+        
+        response.sendRedirect("/Zoo/test/testBuy.jsp");
+    }
+
 }
