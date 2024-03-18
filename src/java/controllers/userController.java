@@ -21,8 +21,13 @@ public class userController extends HttpServlet {
 
     private final userDAO UserDAO;
     private final salesDAO SalesDAO;
+    private final salesTicketTypeDAO sttDAO;
     
-    public userController() {this.UserDAO = new userDAO(); this.SalesDAO = new salesDAO();}
+    public userController() {
+        this.UserDAO = new userDAO(); 
+        this.SalesDAO = new salesDAO();
+        this.sttDAO = new salesTicketTypeDAO();
+    }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -160,14 +165,12 @@ public class userController extends HttpServlet {
         
         if(Ninos != 0){
             salesTicketType SalesTicketType1 = new salesTicketType(Sales.getIdVenta(),1,Ninos);
-            salesTicketTypeDAO.Agregar(SalesTicketType1);
+            sttDAO.Agregar(SalesTicketType1);
         }
         if(Adultos != 0){
             salesTicketType SalesTicketType2 = new salesTicketType(Sales.getIdVenta(),2,Adultos);
-            salesTicketTypeDAO.Agregar(SalesTicketType2);
-        }
-        
+            sttDAO.Agregar(SalesTicketType2);
+        }       
         response.sendRedirect("/Zoo/test/testBuy.jsp");
     }
-
 }
