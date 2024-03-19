@@ -56,7 +56,7 @@
       <!-- NAVBAR -->
       <div class="navbar bg-[#ffc44a] border-b-2 border-black">
         <div class="flex-1">
-          <a class="btn btn-ghost text-2xl text-black">ZooTechnology</a>
+          <a href="mainAdmin.jsp" class="btn btn-ghost text-2xl text-black">ZooTechnology</a>
         </div>
         <div class="flex-none gap-2">
           <div class="form-control">
@@ -65,7 +65,7 @@
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
               <div class="w-10 rounded-full">
-                <img alt="avatar de usuario" src="../public/iconoPerfil.png" />
+                <img alt="avatar de usuario" src="../public/admin.png" />
               </div>
             </div>
             <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 bg-[#ffc44a] text-black
@@ -85,37 +85,44 @@
         <!-- BARRA LATERAL IZQUIERDA -->
         <div class="flex flex-col w-2/12 bg-white py-10 m-0 border-r-2 border-black">
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
-            <a href="../../templates/animales.jsp" class="flex flex-wrap gap-x-8">
+            <a href="animalTablasAdmin.jsp" class="flex flex-wrap gap-x-8">
               <img src="../public/barraLateral/paw-solid.svg" alt="imagen para la sección de animales" class="size-12 float-left">
-              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7 opacity-0 lg:opacity-100
+              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7
               hover:underline">Animales</p>
             </a>
           </div>
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
-            <a href="../../templates/boletos.jsp" class="flex flex-wrap gap-x-8">
+            <a href="boletosAdmin.jsp" class="flex flex-wrap gap-x-8">
               <img src="../public/barraLateral/tickets.svg" alt="imagen para la sección de animales" class="size-12 float-left">
-              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7 opacity-0 lg:opacity-100
+              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7
               hover:underline">Boletos</p>
             </a>
           </div>
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
-            <a href="../../templates/historial.jsp" class="flex flex-wrap gap-x-9">
+            <a href="historial.jsp" class="flex flex-wrap gap-x-9">
               <img src="../public/barraLateral/historial.svg" alt="imagen para la sección de animales" class="size-11 float-left">
-              <p class="float-right leading-[43px] text-black font-medium text-3xl font-['K2D'] mb-7 opacity-0 lg:opacity-100
+              <p class="float-right leading-[43px] text-black font-medium text-3xl font-['K2D'] mb-7
               hover:underline">Historial</p>
             </a>
           </div>
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
-            <a href="../../templates/habitats.jsp" class="flex flex-wrap gap-x-8">
+            <a href="habitatTablasAdmin.jsp" class="flex flex-wrap gap-x-8">
               <img src="../public/barraLateral/area.svg" alt="imagen para la sección de animales" class="size-12 float-left">
-              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7 opacity-0 lg:opacity-100
+              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7
               hover:underline">Habitats</p>
             </a>
           </div>
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
-            <a href="../../templates/administrador/usuarioTablasAdmin.jsp" class="flex flex-wrap gap-x-8">
+            <a href="zonaTablasAdmin.jsp" class="flex flex-wrap gap-x-8">
+              <img src="../public/barraLateral/zona.png" alt="imagen para la sección de animales" class="size-12 float-left">
+              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7
+              hover:underline">Zonas</p>
+            </a>
+          </div>
+          <div class="flex flex-row flex-wrap px-6 w-[100%]">
+            <a href="habitatTablasAdmin.jsp" class="flex flex-wrap gap-x-8">
               <img src="../public/barraLateral/usuario.svg" alt="imagen para la sección de animales" class="size-12 float-left">
-              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7 opacity-0 lg:opacity-100
+              <p class="float-right leading-[50px] text-black font-medium text-3xl font-['K2D'] mb-7
               hover:underline">Usuarios</p>
             </a>
           </div>

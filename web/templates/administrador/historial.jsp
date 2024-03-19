@@ -1,12 +1,12 @@
-<%@page import="modelsBeans.habitat"%>
-<%@page import="modelsDAO.habitatDAO"%>
+<%@page import="modelsBeans.sales"%>
+<%@page import="modelsDAO.salesDAO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Resumen Habitats</title>
+        <title>Historial Admin</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
@@ -35,28 +35,28 @@
                 border-radius: 25px;
                 background-color: rgba(255, 255, 255, 25%);
               }
+          }
 
-              table {
-                width: 100%;
-              }
+          table {
+            width: 100%;
+          }
 
-              table, th, td {
-                color: black;
-                font-family: 'K2D', sans-serif;
-                text-align: center;
-              }
+          table, th, td {
+            color: black;
+            font-family: 'K2D', sans-serif;
+            text-align: center;
+          }
 
-              table, th {
-                border:1px solid black;
-              }
+          table, th {
+            border:1px solid black;
           }
         </style>
     </head>
-    <body>
+    <body class="overflow-y-hidden">
       <!-- NAVBAR -->
       <div class="navbar bg-[#ffc44a] border-b-2 border-black">
         <div class="flex-1">
-          <a href="mainAdmin.jsp" class="btn btn-ghost text-2xl text-black">ZooTechnology</a>
+          <a href="mainAdmin.jsp"class="btn btn-ghost text-2xl text-black">ZooTechnology</a>
         </div>
         <div class="flex-none gap-2">
           <div class="form-control">
@@ -65,7 +65,7 @@
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
               <div class="w-10 rounded-full">
-                <img alt="avatar de usuario" src="../public/admin.png" />
+                <img alt="avatar de usuario" src="../public/admin.png"/>
               </div>
             </div>
             <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 bg-[#ffc44a] text-black
@@ -83,7 +83,7 @@
       <!-- CONTENIDO POSTERIOR A LA NAVBAR -->
       <div class="flex">
         <!-- BARRA LATERAL IZQUIERDA -->
-        <div class="flex flex-col w-2/12 bg-white py-10 m-0 border-r-2 border-black">
+        <div class="flex flex-col w-2/12 bg-white h-screen py-10 m-0 border-r-2 border-black">
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
             <a href="animalTablasAdmin.jsp" class="flex flex-wrap gap-x-8">
               <img src="../public/barraLateral/paw-solid.svg" alt="imagen para la sección de animales" class="size-12 float-left">
@@ -128,53 +128,34 @@
           </div>
         </div>
         <!-- CONTENIDO DEL LADO DERECHO -->
-        <div class="border-2 w-screen h-screen bg-white">
-          <div class="text-center h-fit pb-10 m-0 p-0 mb-10 border-b-[3px] rounded-b-3xl shadow-2xl border-black text-3xl text-black font-['K2D'] py-[30px]">
-            <h1 class="text-center pt-10 text-3xl text-black font-medium">Resumen de tipos de habitats del Zoologico</h1>
-            <a href="agregarHabitat.jsp" type="submit" class="bg-gray-300 text-black w-fit h-fit py-1 px-5 rounded-2xl">
-              <div class="flex">
-                <i class="fa-solid fa-plus"></i>
-                <span class="text-3xl leading-[29px]">Agregar</span>
-              </div>
-            </a>
+        <div class="border-2 w-screen bg-white">
+          <div class="h-fit pb-10 m-0 p-0 mb-10 border-b-[3px] rounded-b-3xl shadow-2xl border-black">
+            <h1 class="text-center pt-10 text-3xl text-black font-medium">¡Aqui podras observar tu historial de compras en la App!</h1>
           </div>
-          <div class="container mx-auto border-2 border-black overflow-x-auto">
+          <div class="container mx-auto border-2 border-black">
             <table>
-              <thead>
-                <tr class="text-xl bg-[#D9D9D9]">
-                    <th>ID HABITAT</th>
-                    <th>NOMBRE</th>
-                    <th>DESCRIPCIÓN</th>
-                    <th>CAPACIDAD</th>
-                    <th>AREA</th>
-                    <th>APERTURA</th>
-                    <th>CIERRE</th>
-                    <th>ID ZONA</th>
-                    <th>ACCIONES</th>
-                </tr>
-              </thead>
+              <tr class="text-xl bg-[#D9D9D9]">
+                <th>ID VENTA</th>
+                <th>FECHA</th>
+<!--                <th>TIPO</th>
+                <th>CANTIDAD</th>-->
+                <th>TOTAL</th>
+              </tr>
               <tbody>
                 <%
-                    habitatDAO HABITAT = new habitatDAO();
-                    List<habitat> listaHabitats = HABITAT.lista();
-                    for(habitat Habitat : listaHabitats) {
+                    salesDAO SALES = new salesDAO();
+                    List<sales> listaSales = SALES.lista();
+                    for(sales Sales : listaSales) {
                 %>
                 <tr class="text-lg">
-                    <td><%= Habitat.getIdHabitat()%></td>
-                    <td><%= Habitat.getNombre()%></td>
-                    <td><%= Habitat.getDescripcion()%></td>
-                    <td><%= Habitat.getCapacidad()%></td>
-                    <td><%= Habitat.getArea()%></td>
-                    <td><%= Habitat.getHorarioAper()%></td>
-                    <td><%= Habitat.getHorarioCier()%></td>
-                    <td><%= Habitat.getIdZona()%></td>
-                    <td>
-                        <a href="/Zoo/habitatController?op=Editar&idHabitat=<%= Habitat.getIdHabitat()%>" style="margin-right: 10px;">Editar</a>
-                        <a href="/Zoo/habitatController?op=Borrar&idHabitat=<%= Habitat.getIdHabitat()%>">Borrar</a>
-                    </td>
+                  <td><%= Sales.getIdVenta()%></td>
+                  <td><%= Sales.getFechaVenta()%></td>
+<!--                  <td>E/J</td>
+                  <td>5</td>-->
+                  <td><%= Sales.getTotal()%></td>
                 </tr>
                 <% } %>
-            </tbody>
+              </tbody>
             </table>
           </div>
         </div>
