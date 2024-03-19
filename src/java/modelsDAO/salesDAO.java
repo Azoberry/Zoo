@@ -2,6 +2,9 @@ package modelsDAO;
 
 import config.conexion;
 import modelsBeans.sales;
+import modelsBeans.user;
+import modelsBeans.salesTicketType;
+import modelsBeans.ticketType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -109,5 +112,78 @@ public class salesDAO {
             System.out.println("No se listo" + e.toString());
         }
         return Sales;
+    }
+    
+    // Regresa un usuario con su nombre completo y su correo
+    public user BuscarDetallesUsuario (int idVenta) {
+        user User = new user();
+        String sql = "SELECT Usuario.nombre, Usuario.apellidoP, Usuario.apellidoM, Usuario.correo FROM Ventas JOIN Usuario ON Ventas.idUsuario = Usuario.idUsuario WHERE Ventas.idVenta = ?";
+        try {
+            con = conexion.conn();
+            pstm = con.prepareStatement(sql);
+            
+            pstm.setInt(1, idVenta);
+            
+            rs = pstm.executeQuery();
+            
+            if (rs.next()) {
+                User.setNombre(rs.getString(1));
+                User.setApellidoP(rs.getString(2));
+                User.setApellidoM(rs.getString(3));
+                User.setCorreo(rs.getString(4));
+            }
+        } catch (SQLException e) {
+            System.out.println("No se listo" + e.toString());
+        }
+        return User;
+    }
+    
+    // Regresa una lista con idBoleto y la cantidad
+    public List BuscarDetallesSTT (int idVenta) {
+        String sql = "SELECT VT.idBoleto, VT.cantidad FROM ventaTipoBoleto VT JOIN Ventas ON VT.idVenta = Ventas.idVenta WHERE Ventas.idVenta = ?";
+        List listSTT = new ArrayList<>();
+        try {
+            con = conexion.conn();
+            pstm = con.prepareStatement(sql);
+            
+            pstm.setInt(1, idVenta);
+            
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                salesTicketType STT = new salesTicketType();
+                
+                STT.setIdBoleto(rs.getInt(1));
+                STT.setCantidad(rs.getInt(2));
+                
+                listSTT.add(STT);
+            }
+        } catch (SQLException e) {
+            System.out.println("No se listo" + e.toString());
+        }
+        return listSTT;
+    }
+    
+    // Regresa toda la informacion de un boleto
+    public ticketType BuscarDetallesBoleto (int idBoleto) {
+        ticketType TT = new ticketType();
+        String sql = "SELECT * FROM tipoboleto WHERE idBoleto = ?";
+        try {
+            con = conexion.conn();
+            pstm = con.prepareStatement(sql);
+            
+            pstm.setInt(1, idBoleto);
+            
+            rs = pstm.executeQuery();
+            
+            if (rs.next()) {
+                TT.setIdBoleto(rs.getInt(1));
+                TT.setTipo(rs.getString(2));
+                TT.setPrecio(rs.getDouble(3));
+            }
+        } catch (SQLException e) {
+            System.out.println("No se listo" + e.toString());
+        }
+        return TT;
     }
 }

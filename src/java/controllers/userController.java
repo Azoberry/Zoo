@@ -5,13 +5,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import jakarta.servlet.RequestDispatcher;
 import java.sql.SQLException;
+
 import modelsBeans.sales;
 import modelsDAO.salesDAO;
+
 import modelsBeans.user;
 import modelsDAO.userDAO;
+
 import modelsBeans.salesTicketType;
 import modelsDAO.salesTicketTypeDAO;
 
@@ -67,13 +69,15 @@ public class userController extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            case "Iniciar Sesion":
+                break;
+            case "IniciarSesion":
                 try {
                     iniciarSesion(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            case "Crear Cuenta":
+                break;
+            case "CrearCuenta":
                 try {
                     iniciarSesion(request, response);
                 } catch (SQLException e) {
@@ -142,12 +146,17 @@ public class userController extends HttpServlet {
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
         
-        if(UserDAO.BuscarPorCredenciales(correo, contrasena) != 0){
-            response.sendRedirect("/Zoo/test/testBuy.jsp");
-        }else{
-            response.sendRedirect("/Zoo/test/testLogin.jsp");            
+        user existeUser = UserDAO.BuscarPorCredenciales(correo, contrasena);
+        if (existeUser != null && existeUser.getIdUsuario() != 0) {
+            if (existeUser.getPrivilegio() == 'U') {
+                response.sendRedirect("/Zoo/templates/inicio.jsp");
+            }
+            else if (existeUser.getPrivilegio() == 'A') {
+                response.sendRedirect("/Zoo/templates/administrador/mainAdmin.jsp");
+            }
+        } else {
+        response.sendRedirect("/Zoo");
         }
-        
     }
     public void pagar(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String id = request.getParameter("id");

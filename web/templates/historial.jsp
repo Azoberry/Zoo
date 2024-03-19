@@ -123,9 +123,8 @@
               <tr class="text-xl bg-[#D9D9D9]">
                 <th>ID VENTA</th>
                 <th>FECHA</th>
-<!--                <th>TIPO</th>
-                <th>CANTIDAD</th>-->
                 <th>TOTAL</th>
+                <th>DETALLES</th>
               </tr>
               <tbody>
                 <%
@@ -136,9 +135,8 @@
                 <tr class="text-lg">
                   <td><%= Sales.getIdVenta()%></td>
                   <td><%= Sales.getFechaVenta()%></td>
-<!--                  <td>E/J</td>
-                  <td>5</td>-->
                   <td><%= Sales.getTotal()%></td>
+                  <td><a href="/Zoo/salesController?op=DetallesVenta&idVenta=<%= Sales.getIdVenta()%>">Detalles</a></td>
                 </tr>
                 <% } %>
               </tbody>

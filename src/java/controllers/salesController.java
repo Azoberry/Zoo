@@ -5,11 +5,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import jakarta.servlet.RequestDispatcher;
 import java.sql.SQLException;
+
+import java.util.List;
+import java.util.ArrayList;
 import modelsBeans.sales;
 import modelsDAO.salesDAO;
+import modelsBeans.user;
+import modelsBeans.salesTicketType;
+import modelsBeans.ticketType;
 
 /*@author Sergio*/
 
@@ -43,7 +48,6 @@ public class salesController extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-
             case "Editar":
                 try {
                     editarSales(request, response);
@@ -54,6 +58,13 @@ public class salesController extends HttpServlet {
             case "Actualizar":
                 try {
                     actualizarSales(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "DetallesVenta":
+                try {
+                    detallesSales(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -95,5 +106,27 @@ public class salesController extends HttpServlet {
         sales Sales = new sales(idVenta, total, idUsuario);
         SalesDAO.Actualizar(Sales);
         response.sendRedirect("/Zoo/tests/testSales.jsp");
+    }
+    
+    private void detallesSales(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        int idVenta = Integer.parseInt(request.getParameter("idVenta"));
+        
+        user existeUser = SalesDAO.BuscarDetallesUsuario(idVenta);
+        sales existeSale = SalesDAO.Buscar(idVenta);
+        List<salesTicketType> listaSTT = SalesDAO.BuscarDetallesSTT(idVenta);
+        
+        List listaTT = new ArrayList<>();
+        for(salesTicketType STT : listaSTT) {
+            int idBoleto = STT.getIdBoleto();
+            ticketType TT = SalesDAO.BuscarDetallesBoleto(idBoleto);
+            listaTT.add(TT);
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/templates/historialDetalles.jsp");
+        request.setAttribute("User", existeUser);
+        request.setAttribute("Sale", existeSale);
+        request.setAttribute("listaSTT", listaSTT);
+        request.setAttribute("listaTT", listaTT);
+        dispatcher.forward(request, response);
+        response.sendRedirect("/Zoo/templates/historialDetalles.jsp");
     }
 }
