@@ -78,21 +78,22 @@ public class animalController extends HttpServlet {
         
         animal Animal = new animal(nombre, apodo, dieta, descripcion, habitatNat, sexo, edad, peso, tamano, idHabitat);
         AnimalDAO.Agregar(Animal);
-        response.sendRedirect("/Zoo/tests/testAnimal.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/animalTablasAdmin.jsp");
     }
     
     private void borrarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
         AnimalDAO.Borrar(idAnimal);
-        response.sendRedirect("/Zoo/tests/testAnimal.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/animalTablasAdmin.jsp");
     }
     
     private void editarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
         animal existeAnimal = AnimalDAO.Buscar(idAnimal);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/tests/testAnimal.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/templates/administrador/editarAnimal.jsp");
         request.setAttribute("Animal", existeAnimal);
         dispatcher.forward(request, response);
+        response.sendRedirect("/Zoo/templates/administrador/editarAnimal.jsp");
     }
     
     private void actualizarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -110,6 +111,6 @@ public class animalController extends HttpServlet {
         
         animal Animal = new animal(idAnimal, nombre, apodo, dieta, descripcion, habitatNat, sexo, edad, peso, tamano, idHabitat);
         AnimalDAO.Actualizar(Animal);
-        response.sendRedirect("/Zoo/tests/testAnimal.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/animalTablasAdmin.jsp");
     }
 }

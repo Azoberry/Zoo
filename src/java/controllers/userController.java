@@ -111,15 +111,16 @@ public class userController extends HttpServlet {
     private void borrarUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         UserDAO.Borrar(idUsuario);
-        response.sendRedirect("/Zoo/tests/testUser.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/usuarioTablasAdmin.jsp");
     }
     
     private void editarUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         user existeUser = UserDAO.Buscar(idUsuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/tests/testUser.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/templates/administrador/editarUsuario.jsp");
         request.setAttribute("User", existeUser);
         dispatcher.forward(request, response);
+        response.sendRedirect("/Zoo/templates/administrador/editarUsuario.jsp");
     }
     
     private void actualizarUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -135,7 +136,7 @@ public class userController extends HttpServlet {
         
         user User = new user(idUsuario, nombre, apellidoP, apellidoM, correo, contrasena, edad, sexo, privilegio);
         UserDAO.Actualizar(User);
-        response.sendRedirect("/Zoo/tests/testUser.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/usuarioTablasAdmin.jsp");
     }
     
     private void iniciarSesion(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
