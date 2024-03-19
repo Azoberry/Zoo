@@ -76,21 +76,22 @@ public class habitatController extends HttpServlet {
         
         habitat Habitat = new habitat(nombre, descripcion, capacidad, area, horarioAper, horarioCier, idZona);
         HabitatDAO.Agregar(Habitat);
-        response.sendRedirect("/Zoo/tests/testHabitat.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/habitatTablasAdmin.jsp");
     }
     
     private void borrarHabitat(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int idHabitat = Integer.parseInt(request.getParameter("idHabitat"));
         HabitatDAO.Borrar(idHabitat);
-        response.sendRedirect("/Zoo/tests/testHabitat.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/habitatTablasAdmin.jsp");
     }
     
     private void editarHabitat(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int idHabitat = Integer.parseInt(request.getParameter("idHabitat"));
         habitat existeHabitat = HabitatDAO.Buscar(idHabitat);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/tests/testHabitat.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/templates/administrador/editarHabitat.jsp");
         request.setAttribute("Habitat", existeHabitat);
         dispatcher.forward(request, response);
+        response.sendRedirect("/Zoo/templates/administrador/editarHabitat.jsp");
     }
     
     private void actualizarHabitat(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -105,6 +106,6 @@ public class habitatController extends HttpServlet {
         
         habitat Habitat = new habitat(idHabitat, nombre, descripcion, capacidad, area, horarioAper, horarioCier, idZona);
         HabitatDAO.Actualizar(Habitat);
-        response.sendRedirect("/Zoo/tests/testHabitat.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/habitatTablasAdmin.jsp");
     }
 }

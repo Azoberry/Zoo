@@ -70,21 +70,22 @@ public class zoneController extends HttpServlet {
         
         zone Zone = new zone(ubicacion, area);
         ZoneDAO.Agregar(Zone);
-        response.sendRedirect("/Zoo/tests/testZone.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/zonaTablasAdmin.jsp");
     }
     
     private void borrarZone(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int idZona = Integer.parseInt(request.getParameter("idZona"));
         ZoneDAO.Borrar(idZona);
-        response.sendRedirect("/Zoo/tests/testZone.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/zonaTablasAdmin.jsp");
     }
     
     private void editarZone(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int idZone = Integer.parseInt(request.getParameter("idZona"));
         zone existeZone = ZoneDAO.Buscar(idZone);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/tests/testZone.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/templates/administrador/editarZonas.jsp");
         request.setAttribute("Zone", existeZone);
         dispatcher.forward(request, response);
+        response.sendRedirect("/Zoo/templates/administrador/editarZonas.jsp");
     }
     
     private void actualizarZone(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -94,6 +95,6 @@ public class zoneController extends HttpServlet {
         
         zone Zone = new zone(idZona, ubicacion, area);
         ZoneDAO.Actualizar(Zone);
-        response.sendRedirect("/Zoo/tests/testZone.jsp");
+        response.sendRedirect("/Zoo/templates/administrador/zonaTablasAdmin.jsp");
     }
 }
