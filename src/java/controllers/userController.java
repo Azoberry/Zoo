@@ -139,7 +139,7 @@ public class userController extends HttpServlet {
         
         user User = new user(nombre, apellidoP, apellidoM, correo, contrasena, edad, sexo, privilegio);
         UserDAO.Agregar(User);
-        response.sendRedirect("/Zoo/index.jsp");
+        response.sendRedirect("/Zoo/templates/inicio.jsp");
     }
     
     private void borrarUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

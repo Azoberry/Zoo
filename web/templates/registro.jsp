@@ -1,3 +1,6 @@
+<%@page import="modelsBeans.user"%>
+<%@page import="modelsDAO.userDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,10 +31,10 @@
         <div class="w-5/12 border-2 border-white fondo-color py-2 px-14 rounded-3xl relative">
           <br><br><br><br>
           <!-- FORMULARIO -->
-          <form action="" method="">
+          <form action="/Zoo/userController" method="POST">
             <!-- NOMBRE -->
-            <div class="relative h-10 w-full min-w-[200px]">
-              <input placeholder="Nombre" 
+            <div class="relative h-10 w-full min-w-[200px]" >
+                <input placeholder="Nombre" name="nombre" type="text"
                 class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
               <label
                 class="font-bold text-3xl text-[#8CD771] text-border
@@ -52,7 +55,7 @@
             <div class="flex">
               <!-- APELLIDO PATERNO -->
               <div class="relative h-10 w-6/12 mr-5 min-w-[200px]">
-                <input placeholder="Apellido Paterno" 
+                <input placeholder="Apellido Paterno" name="apellidoP" type="text"
                   class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
                 <label
                   class="font-bold text-3xl text-[#8CD771] text-border
@@ -71,7 +74,7 @@
               <br>
               <!-- APELLIDO MATERNO -->
               <div class="relative h-10 w-6/12 min-w-[200px]">
-                <input placeholder="Apellido Materno" 
+                <input placeholder="Apellido Materno" name="apellidoM" type="text"
                   class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
                 <label
                   class="font-bold text-3xl text-[#8CD771] text-border
@@ -92,7 +95,7 @@
             <!-- EDAD Y SEXO -->
             <div class="flex">
               <div class="relative h-10 w-6/12 mr-5 min-w-[200px]">
-                <input placeholder="Edad" 
+                <input placeholder="Edad" name="edad"
                   class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
                 <label
                   class="font-bold text-3xl text-[#8CD771] text-border
@@ -111,9 +114,9 @@
               <br>
               <!-- SEXO -->
               <span class="font-bold text-3xl mr-2 text-[#8CD771] text-border">Sexo: </span>
-              <input type="checkbox" id="" name="" value="" class="mr-2 w-5">
+              <input type="checkbox" id="" name="sexo" value="H" class="mr-2 w-5">
               <label for="" class="font-bold text-xl text-white text-border"> Masculino</label>
-              <input type="checkbox" id="" name="" value="" class="ml-2 mr-2 w-5">
+              <input type="checkbox" id="" name="sexo" value="M" class="ml-2 mr-2 w-5">
               <label for="" class="font-bold text-xl text-white text-border"> Femenino</label>
             </div>
 
@@ -121,7 +124,7 @@
             <br>
             <!-- CORREO -->
             <div class="relative h-10 w-full min-w-[200px]">
-              <input placeholder="Correo" type="email"
+              <input placeholder="Correo" type="email" name="correo"
                 class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
               <label
                 class="font-bold text-3xl text-[#8CD771] text-border
@@ -140,7 +143,7 @@
             <br>
             <!-- CONTRASEÑA -->
             <div class="relative h-10 w-full min-w-[200px]">
-              <input placeholder="Contraseña" type="email"
+              <input placeholder="Contraseña" type="password"
                 class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
               <label
                 class="font-bold text-3xl text-[#8CD771] text-border
@@ -159,7 +162,7 @@
             <br>
             <!-- CONTRASEÑA VERIFICACIÓN -->
             <div class="relative h-10 w-full min-w-[200px]">
-              <input placeholder="Verificar Contraseña" type="email"
+              <input placeholder="Verificar Contraseña" type="password" name="contrasena"
                 class="peer h-14 w-full rounded-[7px] border border-blue-gray-200 border-t-transparent px-3 py-2.5 font-sans text-2xl font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
               <label
                 class="font-bold text-3xl text-[#8CD771] text-border
@@ -177,7 +180,7 @@
             </div>
             <br><br>
             <button type="submit" class="bg-[#8CD771] border-2 border-white rounded-3xl w-[276px] h-[63px]
-            text-3xl font-semibold absolute right-20">Registrar</button>
+            text-3xl font-semibold absolute right-20" name="op" value="CrearCuenta">Registrar</button>
           </form>
           <br><br><br><br>
         </div>
