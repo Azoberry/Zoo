@@ -57,6 +57,24 @@ public class salesDAO {
         return r;
     }
     
+    public int ObtenerUltimaVenta (){
+    String sql = "SELECT * FROM ventas ORDER BY idVenta DESC LIMIT 1";
+        int id = -1;
+        
+        try (Connection con = conexion.conn();
+             PreparedStatement pstmt = con.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            
+            if (rs.next()) {
+                id = rs.getInt("idVenta");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return id;
+    }
+    
     public int Actualizar(sales Sales) {
         String sql = "UPDATE ventas SET total = ? WHERE idVenta = ?";
         try {

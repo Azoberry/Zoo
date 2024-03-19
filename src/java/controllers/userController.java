@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.servlet.RequestDispatcher;
 import java.sql.SQLException;
+import java.util.Map;
 import modelsBeans.sales;
 import modelsDAO.salesDAO;
 import modelsBeans.user;
@@ -32,6 +33,22 @@ public class userController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doGet(request, response);
+        //Esta linea se usa para mostrar los parametros y los valores que le llegan a la peticion
+//        Map<String, String[]> parametros = request.getParameterMap();
+//
+//    // Iterar sobre el mapa de parámetros e imprimir cada parámetro y sus valores
+//    for (Map.Entry<String, String[]> entry : parametros.entrySet()) {
+//        String nombreParametro = entry.getKey();
+//        String[] valoresParametro = entry.getValue();
+//        
+//        // Imprimir el nombre del parámetro
+//        System.out.println("Nombre del parámetro: " + nombreParametro);
+//
+//        // Imprimir cada valor del parámetro
+//        for (String valor : valoresParametro) {
+//            System.out.println("Valor: " + valor);
+//        }
+//    }
     }
 
     @Override
@@ -67,22 +84,24 @@ public class userController extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            case "Iniciar Sesion":
-                try {
-                    iniciarSesion(request, response);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            case "Crear Cuenta":
+                break;
+            case "IniciarSesion":
                 try {
                     iniciarSesion(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
+            case "CrearCuenta":
+                try {
+                    crearUser(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
             case "Pagar":
                 try {
-                    actualizarUser(request, response);
+                    pagar(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -105,7 +124,22 @@ public class userController extends HttpServlet {
         
         user User = new user(nombre, apellidoP, apellidoM, correo, contrasena, edad, sexo, privilegio);
         UserDAO.Agregar(User);
-        response.sendRedirect("/Zoo/tests/testUser.jsp");
+        response.sendRedirect("/Zoo/index.jsp");
+    }
+    
+    private void crearUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {        
+        String nombre = request.getParameter("nombre");
+        String apellidoP = request.getParameter("apellidoP");
+        String apellidoM = request.getParameter("apellidoM");
+        String correo = request.getParameter("correo");
+        String contrasena = request.getParameter("contrasena");
+        int edad = Integer.parseInt(request.getParameter("edad"));
+        char sexo = request.getParameter("sexo").charAt(0);
+        char privilegio = 'U';
+        
+        user User = new user(nombre, apellidoP, apellidoM, correo, contrasena, edad, sexo, privilegio);
+        UserDAO.Agregar(User);
+        response.sendRedirect("/Zoo/index.jsp");
     }
     
     private void borrarUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -151,26 +185,36 @@ public class userController extends HttpServlet {
     }
     public void pagar(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String id = request.getParameter("id");
-        String ninos = request.getParameter("ninos");
-        String adultos = request.getParameter("adultos");
-        String total = request.getParameter("costoTotal");
-        
+        String junior = request.getParameter("junior");
+        String estandar = request.getParameter("estandar");
+        String combo = request.getParameter("combo");
+        String total = request.getParameter("costo");
+      
         int Id = Integer.parseInt(id);
-        int Ninos = Integer.parseInt(ninos);
-        int Adultos = Integer.parseInt(adultos);
+        int Junior = Integer.parseInt(junior);
+        int Estandar = Integer.parseInt(estandar);
+        int Combo = Integer.parseInt(combo);
         Double CostoTotal = Double.parseDouble(total);
         
         sales Sales = new sales(CostoTotal, Id);
         SalesDAO.Agregar(Sales);
+        int ultima = SalesDAO.ObtenerUltimaVenta();
         
-        if(Ninos != 0){
-            salesTicketType SalesTicketType1 = new salesTicketType(Sales.getIdVenta(),1,Ninos);
+        //System.out.println("El id de la venta es:"+ultima);
+        
+        if(Junior != 0){
+            salesTicketType SalesTicketType1 = new salesTicketType(ultima,1,Junior);
             sttDAO.Agregar(SalesTicketType1);
         }
-        if(Adultos != 0){
-            salesTicketType SalesTicketType2 = new salesTicketType(Sales.getIdVenta(),2,Adultos);
+        if(Estandar != 0){
+            salesTicketType SalesTicketType2 = new salesTicketType(ultima,2,Estandar);
             sttDAO.Agregar(SalesTicketType2);
-        }       
-        response.sendRedirect("/Zoo/test/testBuy.jsp");
+        }
+        if(Combo != 0){
+            salesTicketType SalesTicketType3 = new salesTicketType(ultima,3,Combo);
+            sttDAO.Agregar(SalesTicketType3);
+        }
+        response.sendRedirect("/Zoo/index.jsp");
     }
+    
 }
