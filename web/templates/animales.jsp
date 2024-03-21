@@ -1,3 +1,6 @@
+<%@page import="modelsBeans.animal"%>
+<%@page import="modelsDAO.animalDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +38,7 @@
           }
         </style>
     </head>
-    <body class="overflow-y-hidden">
+    <body>
       <!-- NAVBAR -->
       <div class="navbar bg-[#ffc44a] border-b-2 border-black">
         <div class="flex-1">
@@ -66,7 +69,7 @@
       <!-- CONTENIDO POSTERIOR A LA NAVBAR -->
       <div class="flex">
         <!-- BARRA LATERAL IZQUIERDA -->
-        <div class="flex flex-col w-2/12 bg-white h-screen py-10 m-0 border-r-2 border-black">
+        <div class="flex flex-col w-2/12 bg-white h-min-screen py-10 m-0 border-r-2 border-black">
           <div class="flex flex-row flex-wrap px-6 w-[100%]">
             <a href="animales.jsp" class="flex flex-wrap gap-x-8">
               <img src="public/barraLateral/paw-solid.svg" alt="imagen para la sección de animales" class="size-12 float-left">
@@ -135,49 +138,26 @@
             </form>
             -->
           </div>
-          <div class="container mx-auto grid grid-cols-4 gap-3 text-2xl text-black font-['K2D'] py-6">
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
+          <div class="container mx-auto grid grid-cols-3 text-2xl text-black font-['K2D'] py-6">
+            <%
+              animalDAO ANIMAL = new animalDAO();
+              List<animal> listaAnimales = ANIMAL.lista();
+              for(animal Animal : listaAnimales) {
+            %>
+            <div class="max-w-sm mx-auto bg-white border mb-8 border-gray-200 rounded-xl p-8 shadow dark:bg-gray-800 dark:border-gray-700">
+              <img class="rounded-lg w-80 mx-auto" src="public/animales/Leon.jpg" alt="imagen de animal de zoologico" />
+              <div class="p-5">
+                <h5 class="mb-1 text-3xl font-bold tracking-tight text-gray-900 dark:text-white"><%= Animal.getNombre()%></h5>
+                <ul class="dark:text-gray-400 text-xl">
+                  <li><b>Cientifico: </b><span><%= Animal.getApodo()%></span></li>
+                  <li><b>Dieta: </b><span><%= Animal.getDieta()%></span></li>
+                  <li><b>Habitat: </b><span><%= Animal.getHabitatNat()%></span></li>
+                  <li><b>Descripción: </b><p><%= Animal.getDescripcion()%></p></li>
+                </ul>
+              </div>
             </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
-            <div class="h-4/12 rounded-xl flex flex-col items-center">
-              <img src="public/filtros/Leon.png" class="size-60 rounded-xl">
-              <p class="text-black text-3xl">León</p>
-              <p class="text-black text-xl">Phantero Leo</p>
-            </div>
+            <% } %>
           </div>
         </div>
-      </div>
     </body>
 </html>
