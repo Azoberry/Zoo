@@ -1,5 +1,6 @@
 package controllers;
 
+import config.conexion;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -7,12 +8,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelsBeans.animal;
 import modelsDAO.animalDAO;
 
 /*@author Sergio*/
-
+@MultipartConfig
 public class animalController extends HttpServlet {
     
     private final animalDAO AnimalDAO;
@@ -64,7 +72,50 @@ public class animalController extends HttpServlet {
         }
     }
     
-    private void agregarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {        
+    private void agregarAnimal(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {        
+        //AGREGAR IMAGEN
+        Part file = request.getPart("image");
+        
+        String imageFileName = file.getSubmittedFileName();
+        System.out.println("Selected image File Name: " + imageFileName);
+        
+        String uploadPath = "C:/Users/terra/OneDrive/Documentos/NetBeansProjects/Zoo/web/imagenes/"+imageFileName;
+        System.out.println("Upload Path: " + uploadPath);
+        
+        try {
+            FileOutputStream fos = new FileOutputStream(uploadPath);
+            InputStream is = file.getInputStream();
+
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            fos.write(data);
+            fos.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            conexion conexion = new conexion();
+            Connection con;
+            con = conexion.conn();
+            PreparedStatement pstm;
+            ResultSet rs;
+            
+            String query = "INSERT INTO imagen(nombreImagen) VALUES (?)";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, imageFileName);
+            int row = pstm.executeUpdate();
+            
+            if (row > 0) {
+                System.out.println("Agregado a la base de datos exitosamente");
+            } else {
+                System.out.println("ERROR al subir la imagen");
+            }
+        } catch(Exception e) {
+            System.out.println("e");
+        }
+        
+        //AGREGAR DATOS DEL ANIMAL
         String nombre = request.getParameter("nombre");
         String apodo = request.getParameter("apodo");
         String dieta = request.getParameter("dieta");

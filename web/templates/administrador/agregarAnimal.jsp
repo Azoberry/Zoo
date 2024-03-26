@@ -133,8 +133,11 @@
         <h1 class="text-center pt-10 text-3xl text-black font-medium">Agregar Animal</h1>
       </div>
       <div class="container mx-auto border-2 border-black overflow-x-auto">
-        <form action="/Zoo/animalController" method="POST">
+        <form action="/Zoo/animalController" method="POST" enctype="multipart/form-data">
             <div>
+                <p class="text-2xl text-black font-semibold">AGREGAR IMAGEN</h1><br>
+                    <input type="file" name="image"><br>
+                    <br>
                 <label class="text-2xl text-black font-semibold">idAnimal</label>
                 <input type="text" value="${Animal.getIdAnimal()}" disabled
                 class="border-black border-2 rounded-lg text-gray-500 bg-white"><br>
